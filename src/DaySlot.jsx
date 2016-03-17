@@ -234,7 +234,7 @@ let DaySlot = React.createClass({
     selector
       .on('click', ({ x, y }) => {
         this._clickTimer = setTimeout(()=> {
-          this._selectSlot(selectionState({ x, y }))
+          this._selectSlot(selectionState({ x, y }), selector)
         })
 
         this.setState({ selecting: false })
@@ -242,7 +242,7 @@ let DaySlot = React.createClass({
 
     selector
       .on('select', () => {
-        this._selectSlot(this.state)
+        this._selectSlot(this.state, selector)
         this.setState({ selecting: false })
       })
   },
@@ -253,7 +253,7 @@ let DaySlot = React.createClass({
     this._selector = null;
   },
 
-  _selectSlot({ startDate, endDate, endSlot, startSlot }) {
+  _selectSlot({ startDate, endDate, endSlot, startSlot }, x) {
     let current = startDate
       , slots = [];
 
@@ -266,7 +266,7 @@ let DaySlot = React.createClass({
       slots,
       start: startDate,
       end: endDate
-    })
+    }, x)
   },
 
   _select(event){
